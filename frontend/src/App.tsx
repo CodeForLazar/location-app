@@ -6,6 +6,7 @@ import Users from "./user/pages/Users";
 import NewPlace from "./places/pages/NewPlace";
 import UserPlaces from "./places/pages/UserPlaces";
 import UpdatePlace from "./places/pages/UpdatePlace";
+import Auth from "./user/pages/Auth";
 
 const router = createBrowserRouter([
   {
@@ -13,14 +14,14 @@ const router = createBrowserRouter([
       { index: true, element: <Users /> },
       { path: "/places/new", element: <NewPlace /> },
       { path: "/:userId/places", element: < UserPlaces /> },
-      { path: "/places/:placesId", element: < UpdatePlace /> }
+      { path: "/places/:placesId", element: < UpdatePlace /> },
+      { path: "/auth", element: < Auth /> }
     ]
   },
 
 ]);
 
 function App() {
-
   return <RouterProvider router={router} />
 }
 

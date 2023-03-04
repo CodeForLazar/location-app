@@ -14,6 +14,7 @@
 @import "./shared/Modal.css";
 @import "./shared/Map.css";
 @import "./shared/PlaceForm.css";
+@import "./user//Auth.css";
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
 

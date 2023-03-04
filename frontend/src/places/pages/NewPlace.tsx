@@ -42,7 +42,7 @@ const NewPlace = (props: any) => {
             element="input"
             type="text"
             label="Title"
-            validators={[{ type: VALIDATOR_TYPE_REQUIRE }]}
+            validators={[VALIDATOR_TYPE_REQUIRE]}
             errorText="Please enter a valid title."
             onInput={onInput}
          />
@@ -50,7 +50,7 @@ const NewPlace = (props: any) => {
             id="description"
             element="textarea"
             label="Description"
-            validators={[{ type: VALIDATOR_TYPE_MINLENGTH, value: 5 }]}
+            validators={[VALIDATOR_TYPE_MINLENGTH]}
             errorText="Please enter a valid description (at least 5 characters)."
             onInput={onInput}
          />
@@ -58,7 +58,7 @@ const NewPlace = (props: any) => {
             id="address"
             element="input"
             label="Address"
-            validators={[{ type: VALIDATOR_TYPE_REQUIRE }]}
+            validators={[VALIDATOR_TYPE_REQUIRE]}
             errorText="Please enter a valid address."
             onInput={onInput}
          />

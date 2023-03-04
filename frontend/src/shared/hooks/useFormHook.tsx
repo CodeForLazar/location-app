@@ -43,16 +43,19 @@ const useFormHook = (initialInputs: any, initFormValidity: any) => {
       })
    }, []);
 
-   const getFormData = useCallback((inputs: FomrData["inputs"], isFormValid: boolean) => {
-      setFormData(prevState => ({
-         ...prevState,
-         inputs,
-         isFormValid
-      }))
-   }, [])
 
+   const changeFormData = (inputs: FomrData["inputs"], formValid: FomrData["isFormValid"]) => {
+      console.log(inputs, formValid)
+      setFormData(prevState => {
+         return {
+            ...prevState,
+            inputs,
+            formValid
+         }
+      })
+   };
 
-   return ({ formData, onInput, getFormData });
+   return ({ formData, onInput, changeFormData });
 }
 
 export default useFormHook;

@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Input from '../../shared/components/FormElements/Input';
@@ -44,39 +44,23 @@ const UpdatePlace = (props: any) => {
    const params = useParams();
    const { placesId } = params;
 
-
-   const { formData, onInput, getFormData } = useFormHook({
-      title: {
-         value: "",
-         isValid: false
-      },
-      description: {
-         value: "",
-         isValid: false
-      }
-   }, false);
-
    const currentPlace = DUMMY_PLACES.find((place) => place.id === placesId);
 
-   useEffect(() => {
-      if (currentPlace) {
-         getFormData({
-            title: {
-               value: currentPlace!.title,
-               isValid: true
-            },
-            description: {
-               value: currentPlace!.description,
-               isValid: true
-            }
-         }, true);
+
+   const { formData, onInput } = useFormHook({
+      title: {
+         value: currentPlace && currentPlace.title,
+         isValid: true
+      },
+      description: {
+         value: currentPlace && currentPlace.description,
+         isValid: true
       }
-      setLoading(false);
-   }, [getFormData,])
+   }, true);
 
    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      console.log(formData, currentPlace)
+      console.log(formData)
    }
 
 
@@ -88,7 +72,7 @@ const UpdatePlace = (props: any) => {
       </div>
    }
 
-   if (!loading) {
+   if (!formData.inputs.title.value) {
       <div className='center'>
          <h2>Loading...</h2>
       </div>
@@ -101,21 +85,19 @@ const UpdatePlace = (props: any) => {
             element={"input"}
             type="text"
             label="Title"
-            validators={[{ type: VALIDATOR_TYPE_REQUIRE }]}
+            validators={[VALIDATOR_TYPE_REQUIRE]}
             errorText="Please enter a valid title."
             onInput={onInput}
             initValue={formData.inputs.title.value}
-            initIsValid={formData.inputs.title.isValid}
          />
          <Input
             id={"description"}
             element={"textarea"}
             label="Description"
-            validators={[{ type: VALIDATOR_TYPE_MINLENGTH, value: 5 }]}
+            validators={[VALIDATOR_TYPE_MINLENGTH]}
             errorText="Please enter a valid description (at least 5 characters)."
             onInput={onInput}
             initValue={formData.inputs.description.value}
-            initIsValid={formData.inputs.description.isValid}
          />
          <Button type="submit" disabled={!formData.isFormValid}>
             UPDATE PLACE
