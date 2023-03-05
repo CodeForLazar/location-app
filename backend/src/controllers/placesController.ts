@@ -37,14 +37,45 @@ export const findPlaceById: RequestHandler = (req, res, next) => {
    if (!place) {
       throw next(new HttpError("No such place buddy", 404))
    }
-   res.json({ place });
+   res.status(200).json({ place });
 }
 
-export const findPlaceByUserId: RequestHandler = (req, res, next) => {
+export const findPlacesByUserId: RequestHandler = (req, res, next) => {
    const userId = req.params.userId;
-   const place = DUMMY_PLACES.find((place) => place.creator === userId);
-   if (!place) {
+   const places = DUMMY_PLACES.filter((place) => place.creator === userId);
+   if (!places || places.length === 0) {
       throw next(new HttpError("No such user buddy", 404))
    }
-   res.json({ place })
+   res.status(200).json({ places });
+}
+
+export const createPlace: RequestHandler = (req, res, next) => {
+   const { title, description, coordinates, address, creator } = req.body;
+
+   const place = {
+      title,
+      description,
+      coordinates,
+      address,
+      creator
+   };
+
+   res.status(201).json({ place });
+}
+
+export const updatePlace: RequestHandler = (req, res, next) => {
+   const { title, description } = req.body;
+   const palceId = req.params.placeId;
+
+   const place = { title, description }
+
+   res.status(201).json({ place });
+}
+
+export const deletePlace: RequestHandler = (req, res, next) => {
+   const palceId = req.params.placeId;
+
+   const place = { id: "yolo" }
+
+   res.status(201).json({ place });
 }
