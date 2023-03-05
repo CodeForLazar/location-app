@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import ProtectedRoute from "./shared/ProtectedRoute";
 import ErrorBoundary from "./ErrorBounderie";
 import RootLayot from "./shared/components/UiElements/RootLayot";
 import Users from "./user/pages/Users";
@@ -12,10 +13,15 @@ const router = createBrowserRouter([
   {
     path: "/", element: <RootLayot />, errorElement: <ErrorBoundary />, children: [
       { index: true, element: <Users /> },
-      { path: "/places/new", element: <NewPlace /> },
+      { path: "/auth", element: < Auth /> },
       { path: "/:userId/places", element: < UserPlaces /> },
-      { path: "/places/:placesId", element: < UpdatePlace /> },
-      { path: "/auth", element: < Auth /> }
+      {
+        element: <ProtectedRoute />, children: [
+          { path: "/places/new", element: <NewPlace /> },
+
+          { path: "/places/:placesId", element: < UpdatePlace /> }
+        ]
+      },
     ]
   },
 

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 
-const Card = (props: any) => {
+const Card = (props: { children: ReactNode, className?: string }) => {
    return (
-      <div className={`card ${props.className}`} style={props.style}>
+      <div className={`card ${props.className}`}>
          {props.children}
       </div>
    );

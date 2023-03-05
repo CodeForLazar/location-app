@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useAppSelector } from "../../store"
 
 import Card from '../../shared/components/UiElements/Card';
 import Button from '../../shared/components/FormElements/Button';
@@ -16,6 +17,8 @@ interface PlaceItem {
 }
 
 const PlaceItem = (props: PlaceItem) => {
+
+   const { isAuth } = useAppSelector(state => state.authReducer);
 
    const [showMap, setShowMap] = useState(false);
    const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -77,8 +80,8 @@ const PlaceItem = (props: PlaceItem) => {
                </div>
                <div className='place-item__actions'>
                   <Button inverse onClick={openMap}>VIEW ON MAP</Button>
-                  <Button to={`/places/${props.id}`}>EDIT</Button>
-                  <Button danger onClick={showDeleteWarning}>DELETE</Button>
+                  {isAuth && <Button to={`/places/${props.id}`}>EDIT</Button>}
+                  {isAuth && <Button danger onClick={showDeleteWarning}>DELETE</Button>}
                </div>
             </Card>
          </li>

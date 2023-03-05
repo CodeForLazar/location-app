@@ -4,7 +4,7 @@ import Avatar from '../../shared/components/UiElements/Avatar';
 import Card from '../../shared/components/UiElements/Card';
 
 interface UserItemProps {
-   id: number;
+   id: string;
    image: string;
    name: string;
    placeCount: number;
@@ -14,7 +14,7 @@ const UserItem = (props: UserItemProps) => {
    return (
       <li className='user-item'>
          <Card className="user-item__content">
-            <Link to={`/${props.id}`}>
+            <Link to={`/${props.id}/places`}>
                <div className='user-item__image'>
                   <Avatar image={props.image} alt={props.name} />
                </div>

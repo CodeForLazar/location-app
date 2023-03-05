@@ -6,7 +6,7 @@ import Card from '../../shared/components/UiElements/Card'
 
 interface User {
   items: {
-    id: number
+    id: string
     image: string
     name: string
     placesCount: number
