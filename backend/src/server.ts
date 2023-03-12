@@ -1,7 +1,12 @@
+import { config } from "dotenv";
+import { ConnectDB } from "./config/db";
 import express from "express";
 
 import router from "./routes";
 import errorHandler from "./middleware/errorHandler";
+
+config();
+ConnectDB();
 
 const app = express();
 
@@ -11,6 +16,6 @@ app.use(router);
 
 app.use(errorHandler);
 
-app.listen(5000, () => {
-   console.log(`Server running on port ${5000}`);
+app.listen(process.env.PORT, () => {
+   console.log(`Server running on port ${process.env.PORT}`)
 });
